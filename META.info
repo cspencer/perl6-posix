@@ -8,5 +8,5 @@
     },
     "test-depends" : [ "Test" ],
     "depends" : [ ],
-    "source-url" : "https://github.com/cspencer/perl6-posix"
+    "source-url" : "https://github.com/cspencer/perl6-posix.git"
 }   
