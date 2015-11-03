@@ -18,7 +18,9 @@ At present, the following functions have been implemented:
   * seteuid(uid_t)
   * getpwnam(Str)
   * getpwent()
-
+  * getgrnam(Str)
+  * getgrgid(gid_t)
+  
 Author
 ------
 

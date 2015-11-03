@@ -6,6 +6,13 @@ package POSIX {
 
   constant darwin_time_t = uint64;
 
+  constant group = class :: is repr('CStruct') {
+                     has Str         $.name;
+                     has Str         $.password;
+                     has gid_t       $.gid;
+                     has CArray[Str] $.members;
+                   };
+  
   constant passwd = do given ($*KERNEL) {
                       when 'darwin' {
                           # OS X defines extra fields in the passwd struct.
@@ -48,4 +55,7 @@ package POSIX {
 
   our sub getpwnam(Str) returns passwd is native is export { * };
   our sub getpwent()    returns passwd is native is export { * };
+
+  our sub getgrgid(gid_t) returns group is native is export { * };
+  our sub getgrnam(Str)   returns group is native is export { * };
 }
