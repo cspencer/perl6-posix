@@ -4,26 +4,48 @@ package POSIX {
   constant uid_t = uint32;
   constant gid_t = uint32;
 
-  class passwd is repr('CStruct') {
-    has Str   $.pw_name;
-    has Str   $.pw_passwd;
-    has uid_t $.pw_uid;
-    has gid_t $.pw_gid;
-    has Str   $.pw_gecos;
-    has Str   $.pw_dir;
-    has Str   $.pw_shell;
-  };
+  constant darwin_time_t = uint64;
 
-  our sub getgid()  returns gid_t is native('libc') { * };
-  our sub getuid()  returns uid_t is native('libc') { * };
-  our sub getegid() returns gid_t is native('libc') { * };
-  our sub geteuid() returns uid_t is native('libc') { * };
+  constant passwd = do given ($*KERNEL) {
+                      when 'darwin' {
+                          # OS X defines extra fields in the passwd struct.
+                          class :: is repr('CStruct') {
+                            has Str           $.username;
+                            has Str           $.password;
+                            has uid_t         $.uid;
+                            has gid_t         $.gid;
+                            has darwin_time_t $.changed;
+                            has Str           $.gecos;
+                            has Str           $.homedir;
+                            has Str           $.shell;
+                            has darwin_time_t $.expiration;
+                          }
+                        };
 
-  our sub setgid(gid_t)  returns int32 is native('libc') { * };
-  our sub setuid(uid_t)  returns int32 is native('libc') { * };
-  our sub setegid(gid_t) returns int32 is native('libc') { * };
-  our sub seteuid(uid_t) returns int32 is native('libc') { * };
+                        default {
+                          # Default passwd struct for Linux and others.
+                          class :: is repr('CStruct') {
+                            has Str   $.username;
+                            has Str   $.password;
+                            has uid_t $.uid;
+                            has gid_t $.gid;
+                            has Str   $.gecos;
+                            has Str   $.homedir;
+                            has Str   $.shell;
+                          }
+                        };
+                      }
 
-  our sub getpwnam(Str) returns passwd is native('libc') { * };
-  our sub getpwent()    returns passwd is native('libc') { * };
+  our sub getgid()  returns gid_t is native { * };
+  our sub getuid()  returns uid_t is native { * };
+  our sub getegid() returns gid_t is native { * };
+  our sub geteuid() returns uid_t is native { * };
+
+  our sub setgid(gid_t)  returns int32 is native { * };
+  our sub setuid(uid_t)  returns int32 is native { * };
+  our sub setegid(gid_t) returns int32 is native { * };
+  our sub seteuid(uid_t) returns int32 is native { * };
+
+  our sub getpwnam(Str) returns passwd is native { * };
+  our sub getpwent()    returns passwd is native { * };
 }
