@@ -4,7 +4,7 @@ use POSIX;
 plan 1;
 
 {
-  my $egid = +$*EGID;
+  my $egid = +$*GROUP;
   my $res = setegid($egid);
   ok(1, 'Called setegid($egid)');
 }
