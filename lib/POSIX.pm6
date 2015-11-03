@@ -36,16 +36,16 @@ package POSIX {
                         };
                       }
 
-  our sub getgid()  returns gid_t is native { * };
-  our sub getuid()  returns uid_t is native { * };
-  our sub getegid() returns gid_t is native { * };
-  our sub geteuid() returns uid_t is native { * };
+  our sub getgid()  returns gid_t is native is export { * };
+  our sub getuid()  returns uid_t is native is export { * };
+  our sub getegid() returns gid_t is native is export { * };
+  our sub geteuid() returns uid_t is native is export { * };
 
-  our sub setgid(gid_t)  returns int32 is native { * };
-  our sub setuid(uid_t)  returns int32 is native { * };
-  our sub setegid(gid_t) returns int32 is native { * };
-  our sub seteuid(uid_t) returns int32 is native { * };
+  our sub setgid(gid_t)  returns int32 is native is export { * };
+  our sub setuid(uid_t)  returns int32 is native is export { * };
+  our sub setegid(gid_t) returns int32 is native is export { * };
+  our sub seteuid(uid_t) returns int32 is native is export { * };
 
-  our sub getpwnam(Str) returns passwd is native { * };
-  our sub getpwent()    returns passwd is native { * };
+  our sub getpwnam(Str) returns passwd is native is export { * };
+  our sub getpwent()    returns passwd is native is export { * };
 }
