@@ -45,17 +45,12 @@ package POSIX {
 
   our sub getgid()  returns gid_t is native is export { * };
   our sub getuid()  returns uid_t is native is export { * };
-  our sub getegid() returns gid_t is native is export { * };
-  our sub geteuid() returns uid_t is native is export { * };
 
   our sub setgid(gid_t)  returns int32 is native is export { * };
   our sub setuid(uid_t)  returns int32 is native is export { * };
-  our sub setegid(gid_t) returns int32 is native is export { * };
-  our sub seteuid(uid_t) returns int32 is native is export { * };
 
   our sub getpwnam(Str) returns passwd is native is export { * };
-  our sub getpwent()    returns passwd is native is export { * };
 
-  our sub getgrgid(gid_t) returns group is native is export { * };
   our sub getgrnam(Str)   returns group is native is export { * };
+  our sub getgrgid(gid_t) returns group is native is export { * };
 }
