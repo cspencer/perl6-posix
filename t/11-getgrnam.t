@@ -1,7 +1,7 @@
 use Test;
 use POSIX;
 
-plan 6;
+plan 5;
 
 {
   my $name  = ~$*GROUP;
