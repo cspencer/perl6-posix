@@ -1,4 +1,5 @@
 {
+    "perl" : "6.*",
     "name" : "POSIX",
     "version" : "0.1.1",
     "description" : "POSIX - Perl interface to IEEE Std 1003.1",
