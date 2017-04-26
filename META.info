@@ -1,5 +1,6 @@
 {
     "name" : "POSIX",
+    "license" : "Artistic-2.0",
     "version" : "0.1.1",
     "description" : "POSIX - Perl interface to IEEE Std 1003.1",
     "author" : "Cory Spencer",
